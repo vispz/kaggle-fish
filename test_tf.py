@@ -21,11 +21,10 @@ import time
 
 def main():
 
-    model_path = 'train_val_test_split/retrained_graph.pb'
+    model_path = 'retrained_graph.pb'
     test_image_dir = 'test-images/'
 
     print("Creating Test Data from Folders in {}".format(test_image_dir))
-    
     test_data=create_test_data(test_image_dir)
     print('Extracting predictions')
     predictions = predict_lbls(
