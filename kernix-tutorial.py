@@ -17,6 +17,7 @@ import matplotlib
 import pickle
 from PIL import Image
 import time
+import xgboost
 
 
 #1)understand what inception layers mean and # of features as each layers
@@ -79,13 +80,17 @@ def main():
         X_train = features
         y_train = labels
     if not cmd_opts.search_cv:
-        clf = svm.SVC(
-            kernel='poly', 
-            C=0.001, 
-            gamma=0.1, 
-            probability=True, 
-            random_state=324
-        )
+        if False:
+            clf = svm.SVC(
+                kernel='poly', 
+                C=0.001, 
+                gamma=0.1, 
+                probability=True, 
+                random_state=324
+            )
+        else:
+            print ("Using XGBoost")
+            clf= xgboost.XGBClassifier()
         print("Fitting Last Layer")
         clf.fit(X_train, y_train)
         if cmd_opts.valid_size > 0 and not cmd_opts.produce_sub:
@@ -95,16 +100,28 @@ def main():
         else:
             print("Skipping Validation since size is 0")
     else:
-        model_params= {
-            #'kernel':['rbf', 'poly'],
-            #'kernel':['rbf', 'poly'],
-            'C':[0.001,0.01,0.1,1,10],
-            'degree': [2,3,5,7],
-            #'gamma':[0.001,0.01,0.1,1,10],
-            'probability':[True],
-            'random_state':[324],
-        }
-        model= svm.SVC()
+        if False:
+            model_params= {
+                #'kernel':['rbf', 'poly'],
+                #'kernel':['rbf', 'poly'],
+                'C':[0.001,0.01,0.1,1,10],
+                'degree': [2,3,5,7],
+                #'gamma':[0.001,0.01,0.1,1,10],
+                'probability':[True],
+                'random_state':[324],
+            }
+            model= svm.SVC()
+        else:
+            model_params= {
+                #'kernel':['rbf', 'poly'],
+                #'kernel':['rbf', 'poly'],
+                'C':[0.001,0.01,0.1,1,10],
+                'degree': [2,3,5,7],
+                #'gamma':[0.001,0.01,0.1,1,10],
+                'probability':[True],
+                'random_state':[324],
+            }
+            model = xgboost.XGBClassifier()
         search_clf= model_selection.GridSearchCV(
             estimator=model, 
             param_grid=model_params,
