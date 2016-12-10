@@ -21,7 +21,7 @@ import time
 
 def main():
 
-    model_path = 'retrained_graph.pb'
+    model_path = 'tensorflow-output/output_graph.pb'
     test_image_dir = 'test-images/'
 
     print("Creating Test Data from Folders in {}".format(test_image_dir))
