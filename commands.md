@@ -4,7 +4,7 @@ python ../tensorflow/tensorflow/examples/image_retraining/retrain.py \
     --output_graph=tensorflow-output/output_graph.pb \
     --output_labels=tensorflow-output/output_labels.txt \
     --summaries_dir=tensorflow-output/retrain_logs \
-    --how_many_training_steps 10000 \
+    --how_many_training_steps 1000 \
     --validation_percentage 15 \
     --testing_percentage 15 \
     --model_dir=tensorflow-output/imagenet \
