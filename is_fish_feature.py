@@ -92,9 +92,13 @@ def main():
     clf_is_fish.fit(X_is_fish_train, y_is_fish_train)
     is_fish_train_pred = clf_is_fish.predict(X_is_fish_train)
     print("Adding is fish model features to main model")
+    print(len(X_train[0]))
+    new_train=[]
     for i, row in enumerate(X_train):
-        row= np.append(row, is_fish_train_pred[i] == "FISH")
+        new_train.append(np.append(arr=row, values=int(is_fish_train_pred[i] == "FISH")))
     print ("Using XGBoost")
+    print(len(new_train[0]))
+    X_train= np.array(new_train)
     clf= xgboost.XGBClassifier()
     print("Fitting Last Layer")
     clf.fit(X_train, y_train)
@@ -115,8 +119,10 @@ def main():
     print('Predict is fish features for test')
     is_fish_test_pred= clf_is_fish.predict(test_features)
     print("Adding is fish model test features")
+    new_test=[]
     for i, row in enumerate(test_features):
-        row= np.append(row, is_fish_train_pred[i] == "FISH")
+        new_test.append(np.append(row, int(is_fish_train_pred[i] == "FISH")))
+    test_features= np.array(new_test)
     print('Predicting Test')
     test_pred = clf.predict(test_features)
     csv_headers = [
