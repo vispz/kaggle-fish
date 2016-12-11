@@ -41,7 +41,7 @@ def main():
         columns=[
             'SHARK',
             'DOL',
-            'NOF',
+            'NoF',
             'LAG',
             'ALB',
             'YFT',
