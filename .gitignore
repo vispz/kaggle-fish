@@ -5,3 +5,5 @@ test-features
 venv/
 tf-data/raw-data/
 tensorflow-output/
+features-is-fish
+labels-is-fish
