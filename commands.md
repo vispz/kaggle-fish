@@ -17,3 +17,11 @@ python ../tensorflow/tensorflow/examples/image_retraining/retrain.py \
 
 # testing
 python test_tf.py
+
+
+# compare submissions
+python mxe_diff.py \
+    --old-sub kaggle-submissions/submission-v1.csv \
+    --new-sub kaggle-submissions/submission-v10-Poly-degree2-C10.csv \
+    --num-top-mismatch 5 \
+    --no-plot-mismatch
