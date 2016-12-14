@@ -1,5 +1,14 @@
 """This script splits the train images into train and valid for
 tensorflow.
+
+.. code-block:: bash
+
+    python split_train_valid.py \
+        --input-path train-images \
+        --train-path split_data/train \
+        --validation-path split_data/valid \
+        --train-ratio 0.7 \
+        --silent
 """
 import argparse
 import logging
