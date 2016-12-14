@@ -12,7 +12,8 @@ python ../tensorflow/tensorflow/examples/image_retraining/retrain.py \
     --flip_left_right \
     --random_crop 15 \
     --random_scale 15 \
-    --random_brightness 15
+    --random_brightness 15 \
+    --print_misclassified_test_images
 
 
 # testing
