@@ -136,19 +136,21 @@ def merge_several_folds_mean(data, nfolds):
 def create_model():
     model = Sequential()
     model.add(ZeroPadding2D((1, 1), input_shape=(3, 48, 48), dim_ordering='th'))
-    model.add(Convolution2D(4, 3, 3, activation='relu', dim_ordering='th',init='he_uniform'))
+    model.add(Convolution2D(8, 3, 3, activation='relu', dim_ordering='th',init='he_uniform'))
     model.add(ZeroPadding2D((1, 1), dim_ordering='th'))
-    model.add(Convolution2D(4, 3, 3, activation='relu', dim_ordering='th',init='he_uniform'))
+    model.add(Convolution2D(16, 3, 3, activation='relu', dim_ordering='th',init='he_uniform'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), dim_ordering='th'))
     
     model.add(ZeroPadding2D((1, 1), dim_ordering='th'))
-    model.add(Convolution2D(8, 3, 3, activation='relu', dim_ordering='th',init='he_uniform'))
+    model.add(Convolution2D(16, 3, 3, activation='relu', dim_ordering='th',init='he_uniform'))
     model.add(ZeroPadding2D((1, 1), dim_ordering='th'))
-    model.add(Convolution2D(8, 3, 3, activation='relu', dim_ordering='th',init='he_uniform'))
+    model.add(Convolution2D(16, 3, 3, activation='relu', dim_ordering='th',init='he_uniform'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), dim_ordering='th'))
     
     model.add(Flatten())
-    model.add(Dense(96, activation='relu',init='he_uniform'))
+    model.add(Dense(192, activation='relu',init='he_uniform'))
+    model.add(Dropout(0.515))
+    model.add(Dense(48, activation='relu',init='he_uniform'))
     model.add(Dropout(0.515))
     model.add(Dense(16, activation='relu',init='he_uniform'))
     model.add(Dropout(0.515))
@@ -170,9 +172,9 @@ def get_validation_predictions(train_data, predictions_valid):
 def run_cross_validation_create_models(nfolds=10):
     # input image dimensions
     batch_size = 24
-    nb_epoch = 15
+    nb_epoch = 30
     random_state = 51
-    first_rl = 96
+    first_rl = 192
 
     train_data, train_target, train_id = read_and_normalize_train_data()
 
